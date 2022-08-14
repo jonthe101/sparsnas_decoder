@@ -187,11 +187,11 @@ public:
         float watt = effect * 24;
         int data4 = data_[4]^0x0f;
 //      Note that data_[4] cycles between 0-3 when you first put in the batterys in t$
-        if(data4 == 1){
-          watt = (double)((3600000 / PULSES_PER_KWH) * 1024) / (effect);
-        } else if (data4 == 0 ) { // special mode for low power usage
-          watt = effect * 0.24 / PULSES_PER_KWH;
-        }
+        //if(data4 == 1){
+        watt = (double)((3600000 / PULSES_PER_KWH) * 1024) / (effect);
+        //} else if (data4 == 0 ) { // special mode for low power usage
+        //  watt = effect * 0.24 / PULSES_PER_KWH;
+        //}
         m += sprintf(m, "{\"Sequence\":%6d, \"Watt\":%8.2f, \"kWh\":%9.3f, \"battery\":%4d, \"FreqErr\":%5.2f, \"Effect\":%5d, \"Data4\":%2d",
             seq, watt, pulse/(float)PULSES_PER_KWH, battery, freq, effect, data4);
         if (testing && crc == packet_crc) {
